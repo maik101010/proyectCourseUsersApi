@@ -3,13 +3,13 @@ package user
 import (
 	"fmt"
 	"github.com/maik101010/oauthCourseGoLibrary/oauth"
+	"github.com/maik101010/proyectCourseUtilsGoLibrary/rest_errors"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/maik101010/proyectCourseUsersApi/domain/user"
 	service "github.com/maik101010/proyectCourseUsersApi/services"
-	"github.com/maik101010/proyectCourseUsersApi/utils/errors"
 )
 
 const (
@@ -22,10 +22,10 @@ func TestServiceInterface() {
 }
 
 //getUserById funtion get user by id
-func getUserByID(id string) (int64, *errors.RestError) {
+func getUserByID(id string) (int64, *rest_errors.RestError) {
 	userID, userErr := strconv.ParseInt(id, 10, 64)
 	if userErr != nil {
-		return 0, errors.NewBadRequestError("Invalid user id, give a number")
+		return 0, rest_errors.NewBadRequestError("Invalid user id, give a number")
 	}
 	return userID, nil
 }
@@ -35,7 +35,7 @@ func Create(c *gin.Context) {
 	var user user.User
 	fmt.Println(user)
 	if err := c.ShouldBindJSON(&user); err != nil {
-		restError := errors.NewBadRequestError("Invalidad json body")
+		restError := rest_errors.NewBadRequestError("Invalidad json body")
 		c.JSON(restError.Status, restError)
 		fmt.Println("Error: ", err.Error())
 		return
@@ -68,7 +68,7 @@ func Update(c *gin.Context) {
 	}
 	var user user.User
 	if err := c.ShouldBindJSON(&user); err != nil {
-		restError := errors.NewBadRequestError("Invalidad json body")
+		restError := rest_errors.NewBadRequestError("Invalidad json body")
 		c.JSON(restError.Status, restError)
 		return
 	}
@@ -135,7 +135,7 @@ func Search(c *gin.Context) {
 func Login(c *gin.Context)  {
 	var request user.LoginRequest
 	if err:=c.ShouldBindJSON(&request); err!=nil {
-		restErr:= errors.NewBadRequestError("invalid json body")
+		restErr:= rest_errors.NewBadRequestError("invalid json body")
 		c.JSON(restErr.Status, restErr.Error)
 		return
 	}

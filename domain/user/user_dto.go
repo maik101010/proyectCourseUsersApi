@@ -1,8 +1,8 @@
 package user
 
 import (
+	"github.com/maik101010/proyectCourseUtilsGoLibrary/rest_errors"
 	"strings"
-	"github.com/maik101010/proyectCourseUsersApi/utils/errors"
 )
 
 //User struct
@@ -20,16 +20,16 @@ type User struct {
 type Users []User
 
 //Validate parameters user for struct
-func (user *User) Validate() *errors.RestError {
+func (user *User) Validate() *rest_errors.RestError {
 	user.FirstName = strings.TrimSpace(user.FirstName)
 	user.LastName = strings.TrimSpace(user.LastName)
 	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
 	if user.Email == "" {
-		return errors.NewBadRequestError("Invalidad email address")
+		return rest_errors.NewBadRequestError("Invalidad email address")
 	}
 	user.Password = strings.TrimSpace(user.Password)
 	if user.Password == "" {
-		return errors.NewBadRequestError("Invalidad password")
+		return rest_errors.NewBadRequestError("Invalidad password")
 	}
 	return nil
 }
