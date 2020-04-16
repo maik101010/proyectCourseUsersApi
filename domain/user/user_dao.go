@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/maik101010/proyectCourseUsersApi/datasource/mysql/user_db_client"
-	"github.com/maik101010/proyectCourseUsersApi/logger"
 	"github.com/maik101010/proyectCourseUsersApi/utils/mysql_utils"
+	"github.com/maik101010/proyectCourseUtilsGoLibrary/logger"
 	"github.com/maik101010/proyectCourseUtilsGoLibrary/rest_errors"
 	"strings"
 )
@@ -29,7 +29,7 @@ const (
 )
 
 //Get user by id
-func (user *User) Get() *rest_errors.RestError {
+func (user *User) Get() rest_errors.RestError {
 	statement, err := user_db_client.ClientDb.Prepare(QuerySelecttUser)
 	if err != nil {
 		logger.Error("Error trying to prepare get user statement", err)
@@ -45,7 +45,7 @@ func (user *User) Get() *rest_errors.RestError {
 }
 
 //Save user
-func (user *User) Save() * rest_errors.RestError {
+func (user *User) Save() rest_errors.RestError {
 	statement, err := user_db_client.ClientDb.Prepare(QueryInsertUser)
 	if err != nil {
 		logger.Error("Error trying to prepare save user statement", err)
@@ -70,7 +70,7 @@ func (user *User) Save() * rest_errors.RestError {
 	return nil
 }
 	//Update function update user database
-	func (user *User) Update() *rest_errors.RestError {
+	func (user *User) Update() rest_errors.RestError {
 		statement, err := user_db_client.ClientDb.Prepare(QueryUpdateUser)
 		if err != nil {
 		logger.Error("Error when trying to update save statement", err)
@@ -86,7 +86,7 @@ func (user *User) Save() * rest_errors.RestError {
 	}
 
 	//Delete function update user database
-	func (user *User) Delete() *rest_errors.RestError {
+	func (user *User) Delete() rest_errors.RestError {
 		statement, err := user_db_client.ClientDb.Prepare(QueryDeleteUser)
 		if err != nil {
 		logger.Error("Error when prepare to delete user", err)
@@ -102,7 +102,7 @@ func (user *User) Save() * rest_errors.RestError {
 	}
 
 	//FindByStatus find users by status
-	func (user *User) FindByStatus(status string) ([]User, *rest_errors.RestError) {
+	func (user *User) FindByStatus(status string) ([]User, rest_errors.RestError) {
 		statement, err := user_db_client.ClientDb.Prepare(FindUserByStatus)
 		if err != nil {
 			logger.Error("Error when prepare to find user by status", err)
@@ -129,7 +129,7 @@ func (user *User) Save() * rest_errors.RestError {
 		return results, nil
 	}
 //Get user by id
-	func (user *User) FindByEmailAndPassword() *rest_errors.RestError {
+	func (user *User) FindByEmailAndPassword() rest_errors.RestError {
 		statement, err := user_db_client.ClientDb.Prepare(FindByEmailAndPassword)
 		if err != nil {
 			logger.Error("Error trying to prepare get user by email and password", err)
@@ -148,7 +148,7 @@ func (user *User) Save() * rest_errors.RestError {
 	}
 
 	// TruncateUsers function truncate
-	func TruncateUsers() *rest_errors.RestError {
+	func TruncateUsers() rest_errors.RestError {
 		statement, err := user_db_client.ClientDb.Prepare(QueryTruncateUser)
 		if err != nil {
 			return rest_errors.NewInternalServerError("error when trying to truncate user error", errors.New("database error"))

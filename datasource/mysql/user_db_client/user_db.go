@@ -3,9 +3,10 @@ package user_db_client
 import (
 	"database/sql"
 	"fmt"
-	"log"
-
+	"github.com/go-sql-driver/mysql"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/maik101010/proyectCourseUtilsGoLibrary/logger"
+	"log"
 )
 
 // const (
@@ -40,6 +41,7 @@ func init() {
 	if err = ClientDb.Ping(); err != nil {
 		panic(err)
 	}
+	mysql.SetLogger(logger.GetLogger())
 	log.Println("Database succesfully configuration")
 
 }
