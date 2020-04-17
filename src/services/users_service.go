@@ -1,9 +1,8 @@
 package service
 
 import (
-	"github.com/maik101010/proyectCourseUsersApi/domain/user"
-	users "github.com/maik101010/proyectCourseUsersApi/domain/user"
-	"github.com/maik101010/proyectCourseUsersApi/utils/date_utils"
+	users "github.com/maik101010/proyectCourseUsersApi/src/domain/user"
+	"github.com/maik101010/proyectCourseUsersApi/src/utils/date_utils"
 	"github.com/maik101010/proyectCourseUtilsGoLibrary/crypto_utils"
 	"github.com/maik101010/proyectCourseUtilsGoLibrary/rest_errors"
 )
@@ -21,7 +20,7 @@ type usersServiceInterface interface {
 	GetUser(int64) (*users.User, rest_errors.RestError)
 	DeleteUser(int64) rest_errors.RestError
 	Search(string) (users.Users, rest_errors.RestError)
-	LoginUser(request user.LoginRequest) (*users.User, rest_errors.RestError)
+	LoginUser(request users.LoginRequest) (*users.User, rest_errors.RestError)
 	TruncateUsers() rest_errors.RestError
 }
 
@@ -89,7 +88,7 @@ func (s *usersService) Search(status string) (users.Users, rest_errors.RestError
 	return dao.FindByStatus(status)
 }
 
-func (s * usersService) LoginUser(request user.LoginRequest) (*users.User, rest_errors.RestError){
+func (s * usersService) LoginUser(request users.LoginRequest) (*users.User, rest_errors.RestError){
 	dao := &users.User{
 		Email:request.Email,
 		Password:crypto_utils.GetMd5(request.Password),
@@ -103,5 +102,5 @@ func (s * usersService) LoginUser(request user.LoginRequest) (*users.User, rest_
 
 //TruncateUsers truncate table user
 func (s *usersService) TruncateUsers() rest_errors.RestError {
-	return user.TruncateUsers()
+	return users.TruncateUsers()
 }

@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/maik101010/proyectCourseUsersApi/controller/ping"
-	user "github.com/maik101010/proyectCourseUsersApi/controller/users"
+	"github.com/maik101010/proyectCourseUsersApi/src/controller/ping"
+	user "github.com/maik101010/proyectCourseUsersApi/src/controller/users"
 )
 
 //MapUrls method

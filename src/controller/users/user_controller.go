@@ -8,8 +8,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/maik101010/proyectCourseUsersApi/domain/user"
-	service "github.com/maik101010/proyectCourseUsersApi/services"
+	"github.com/maik101010/proyectCourseUsersApi/src/domain/user"
+	service "github.com/maik101010/proyectCourseUsersApi/src/services"
 )
 
 const (

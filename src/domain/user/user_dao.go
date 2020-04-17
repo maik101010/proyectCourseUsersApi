@@ -3,8 +3,8 @@ package user
 import (
 	"errors"
 	"fmt"
-	"github.com/maik101010/proyectCourseUsersApi/datasource/mysql/user_db_client"
-	"github.com/maik101010/proyectCourseUsersApi/utils/mysql_utils"
+	"github.com/maik101010/proyectCourseUsersApi/src/datasource/mysql/user_db_client"
+	"github.com/maik101010/proyectCourseUsersApi/src/utils/mysql_utils"
 	"github.com/maik101010/proyectCourseUtilsGoLibrary/logger"
 	"github.com/maik101010/proyectCourseUtilsGoLibrary/rest_errors"
 	"strings"
